@@ -11,3 +11,7 @@
 #table{
     align-self: center;
 }
+table {
+    width: 100%;
+  }
+  

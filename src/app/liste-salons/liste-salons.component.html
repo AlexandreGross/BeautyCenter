@@ -19,7 +19,7 @@
     <div class="col-10">
 
       <!--boucle sur chaque salon présent dans la base de données-->
-      <div *ngFor="let u of salooon">
+      <div *ngFor="let u of touslessalons">
         <!--card contenant toutes les infos-->
         <div class="card p-1" (click)="goSalon(u.id)" id="carte">
           <div class="container">
@@ -41,9 +41,9 @@
 
                 <br>
 
-                <img src="http://simpleicon.com/wp-content/uploads/phone-1.png" style="width : 20px;"><span
+                <img src="https://image.flaticon.com/icons/svg/149/149384.svg" style="width : 20px;"><span
                   class="ml-2 infosalon">{{u.telephone}}</span><br>
-                <img src="https://image.flaticon.com/icons/png/512/9/9275.png" style="width : 20px;"><span
+                <img src="https://image.flaticon.com/icons/svg/967/967848.svg" style="width : 20px;"><span
                   class="ml-2 infosalon">{{u.adresse}}</span><br><br>
 
                 <p class="mt-2 infosalontext">Coiffure, Manucure, Pédicure</p>

@@ -4,6 +4,8 @@ import { ServiceStockageService } from '../service-stockage.service';
 import { Http } from '@angular/http';
 import { ActivationEnd } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-espace-admin',
   templateUrl: './espace-admin.component.html',
@@ -13,7 +15,7 @@ export class EspaceAdminComponent implements OnInit {
 
   constructor(private http: Http, private stockageService: ServiceStockageService) { }
 
-  //récupérer l'ID et stocker les info de l'administrateur sur la session
+
   id = this.stockageService.id;
   resUser;
   nomA;
@@ -21,35 +23,13 @@ export class EspaceAdminComponent implements OnInit {
   mailA;
   mdpA;
   accessA;
-
-  //stocker les info du manager que l'administrateur souhaite modifier
   managerModif: User = new User;
-
-  //stocker les info du manager que l'administrateur souhaite activer ou désactiver
-
-  //variable qui chargera la liste de tous les managers
   manager;
-
-  //variable qui charge le mail de manager crée qui est utilisé pour envoyer un mail
   mail;
-
-  //variable pour switcher entre le panneau d'ajout et de modification de manager
   show = true;
-
-  //stocker les info du manager à ajouter;
   man: User = new User();
-
-  //stocker les info du manager à modifier;
   manag: User = new User();
-
-  //pour afficher le message après la création de manager
   showMessageCreate = false;
-
-  showModif = false;
-  showAjout = false;
-
-
-
 
   ngOnInit() {
     this.http.get('http://localhost:8080/users/' + this.id)
@@ -66,13 +46,13 @@ export class EspaceAdminComponent implements OnInit {
         });
   }
 
-  chargeListe(){
+  chargeListe() {
     this.http.get('http://localhost:8080/users/managers')
-    .subscribe(
-      response => {
-        console.log(response.json());
-        this.manager = response.json();
-      });
+      .subscribe(
+        response => {
+          console.log(response.json());
+          this.manager = response.json();
+        });
   }
 
   goModif(id) {
@@ -97,13 +77,7 @@ export class EspaceAdminComponent implements OnInit {
     this.showModif = false;
   }
 
-  afficheAjout() {
-    this.showAjout = true;
-    this.showModif = false;
-    this.ajoutReset();
-  }
-
-  cacheAjoutModif(){
+  cacheAjoutModif() {
     this.showAjout = false;
     this.showModif = false;
   }
@@ -111,32 +85,32 @@ export class EspaceAdminComponent implements OnInit {
   managerAD: User = new User;
   managerInactif: User = new User;
   managerActif: User = new User;
-  getInfo(id){
+  getInfo(id) {
     this.http.get('http://localhost:8080/users/' + id).subscribe(
       response => {
         console.log(response.json());
         this.managerAD = response.json();
       });
-    }
+  }
 
-  activation(id){
-      if(this.managerAD.access==3){
-        this.managerAD.access=5;
-        this.http.put('http://localhost:8080/user/' + id, this.managerAD).subscribe(
-      response => {
-        console.log(response.json());
-        this.managerInactif = response.json();
-        this.ngOnInit();
-      });
-    }else if (this.managerAD.access==5){
-      this.managerAD.access=3;
-        this.http.put('http://localhost:8080/user/' + id, this.managerAD).subscribe(
-      response => {
-        console.log(response.json());
-        this.managerActif = response.json();
-        this.ngOnInit();
-      });
-      
+  activation(id) {
+    if (this.managerAD.access == 3) {
+      this.managerAD.access = 5;
+      this.http.put('http://localhost:8080/user/' + id, this.managerAD).subscribe(
+        response => {
+          console.log(response.json());
+          this.managerInactif = response.json();
+          this.ngOnInit();
+        });
+    } else if (this.managerAD.access == 5) {
+      this.managerAD.access = 3;
+      this.http.put('http://localhost:8080/user/' + id, this.managerAD).subscribe(
+        response => {
+          console.log(response.json());
+          this.managerActif = response.json();
+          this.ngOnInit();
+        });
+
     }
   }
 
@@ -158,11 +132,24 @@ export class EspaceAdminComponent implements OnInit {
     this.ngOnInit();
   }
 
-  ajoutReset(){
-    this.man.nom="";
-    this.man.prenom="";
-    this.man.mail="";
-    this.man.mdp="";
+  ajoutReset() {
+    this.man.nom = "";
+    this.man.prenom = "";
+    this.man.mail = "";
+    this.man.mdp = "";
+  }
+
+  showModif = false;
+  affCach() {
+    this.showModif = !this.showModif;
+    this.showAjout = false;
+  };
+
+  showAjout = false;
+  afficheAjout() {
+    this.showAjout = !this.showAjout;
+    this.showModif = false;
+    this.ajoutReset();
   }
 
 }

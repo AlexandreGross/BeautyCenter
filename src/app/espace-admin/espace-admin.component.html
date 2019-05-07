@@ -1,151 +1,35 @@
 <div class="container">
-  <div class="row mt-4">
-    <br>
-
-    <div class="col-9 p-4" style="border-right: 1px solid;">
-      <div class="row">
-        <div class="col">
-          <h3 class="titre">Bonjour, {{ prenomA }} {{ nomA }} - Votre Espace Admin</h3><br>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <!--ajouter un manager-->
-          <div style="width: 100%" class="alert alert-success text-center" role="alert" *ngIf="showMessageCreate">
-            Le compte a bien été créé.
-          </div>
-          <br>
-          <!--charger la liste des managers-->
-          <div style="width: 500px;">
-            <h3 class="mx-auto text-center">Liste des managers</h3><br>
-            <table class="table table-hover self-center">
-              <thead class="thead-light table-info text-center self-center">
-                <tr>
-                  <th></th>
-                  <th>Nom</th>
-                  <th>Prenom</th>
-                  <th>Mail</th>
-                  <th>Etat</th>
-                  <th>Modifier</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let m of manager" class="self-center">
-                <tr>
-                  <td><img src="{{m.photo}}" style="width:50px;"></td>
-                  <td>{{m.nom}}</td>
-                  <td>{{m.prenom}}</td>
-                  <td>{{m.mail}}</td>
-                  <td>
-                    <div *ngIf="m.access == 3">
-                      <label id="labelA">Actif</label>
-                    </div>
-                    <div *ngIf="m.access == 5">
-                      <label id="labelB">Inactif</label>
-                    </div>
-                  </td>
-                  <td>
-                    <div>
-                      <button mat-button color="primary" (click)="goModif(m.id)">Modifier</button>
-                    </div>
-                  </td>
-                  <td>
-                    <div *ngIf="m.access == 3">
-                      <button mat-button color="warn" (click)="getInfo(m.id)" data-toggle="modal"
-                        data-target="#activation">Désactiver</button>
-                    </div>
-                    <div *ngIf="m.access == 5">
-                        <button id="butn" mat-button (click)="getInfo(m.id)" data-toggle="modal"
-                          data-target="#reactivation">Réactiver</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <br>
-          </div>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col">
+      <h3 class="titre">Bonjour, {{ prenomA }} {{ nomA }} - Votre Espace Admin</h3><br>
     </div>
-
-    <!--paneau pour ajouter un manager-->
-    <div class="col-3 p-4">
-      <div class="row">
-        <div class="col">
-          <br><br><br><button mat-stroked-button type="button" (click)="afficheAjout()" (click)="ajoutReset()"
-            data-toggle="modal">Ajouter un
-            manager</button>
-        </div>
-      </div>
-      <div class="row" style="text-align: center;" *ngIf="showAjout">
-        <div class="col">
-          <br><br>
-          <h3>Ajouter un manager</h3><br>
-          <form>
-            <div class="form-group">
-              <label> Nom du manager</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.nom" name="nomMA">
-            </div>
-            <div class="form-group">
-              <label> Prénom du manager</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.prenom"
-                name="prenomMA">
-            </div>
-            <div class="form-group">
-              <label> e-mail</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.mail"
-                name="mailMA">
-            </div>
-            <div class="form-group">
-              <label> Mot de passe </label>
-              <input type="password" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.mdp"
-                name="mdpMA">
-            </div>
-            <div>
-              <br>
-              <button (click)="createManager()" class="btn btn-primary" data-dismiss="modal">Ajouter un
-                manager</button>
-              <button (click)="cacheAjoutModif()" class="btn btn-basic">Retour</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="row" style="text-align: center" *ngIf="showModif">
-        <div class="col">
-          <br><br>
-          <h3>Modification</h3><br>
-          <form>
-            <div class="form-group">
-              <label> Nom de manager</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="managerModif.nom"
-                name="nom">
-            </div>
-            <div class="form-group">
-              <label> Prénom de manager</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="managerModif.prenom"
-                name="prenom">
-            </div>
-            <div class="form-group">
-              <label> e-mail</label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="managerModif.mail"
-                name="mail">
-            </div>
-            <div class="form-group">
-              <label> Mot de passe </label>
-              <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="managerModif.mdp"
-                name="mdp">
-            </div>
-            <div>
-              <button (click)="modifManager(managerModif.id)" class="btn btn-primary"
-                data-dismiss="modal">Modifier</button>
-              <button (click)="cacheAjoutModif()" class="btn btn-basic">Retour</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
   </div>
+  <div class="row">
+    <div style="width: 100%" class="alert alert-success text-center" role="alert" *ngIf="showMessageCreate">
+      Le compte a bien été créé.
+    </div>
+  </div>
+  <div class="row" style="text-align: center">
+    <div class="col">
+      <button mat-stroked-button type="button" (click)="afficheAjout()" (click)="ajoutReset()"
+        data-toggle="modal">Ajouter un
+        manager</button>
+      <div class="row" style="text-align: center" *ngIf="showAjout">
+        <div class="col">
+          <br>
+          <app-ajout-admin></app-ajout-admin>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Liste des Managers">
+      <app-liste-mangers></app-liste-mangers>
+    </mat-tab>
+    <mat-tab label="Liste des Clients">
+      <app-liste-clients></app-liste-clients>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 
 <div class="modal fade" id="activation" tabindex="-1" role="dialog" aria-labelledby="connexionLabel" aria-hidden="true">
@@ -156,7 +40,8 @@
       </div>
       <div class="modal-body">
 
-        <h6 class="card-title text-center">Désactiver le compte du manager <strong>{{managerAD.prenom}} {{managerAD.nom}} ?</strong></h6>
+        <h6 class="card-title text-center">Désactiver le compte du manager <strong>{{managerAD.prenom}}
+            {{managerAD.nom}} ?</strong></h6>
         <form>
           <div class="d-flex justify-content-center">
             <button class="btn btn-primary" data-dismiss="modal" (click)="activation(managerAD.id)">Valider</button>
@@ -167,22 +52,24 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="reactivation" tabindex="-1" role="dialog" aria-labelledby="connexionLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"> </h5>
-        </div>
-        <div class="modal-body">
-  
-          <h6 class="card-title text-center">Réactiver le compte du manager <strong>{{managerAD.prenom}} {{managerAD.nom}} ?</strong></h6>
-          <form>
-            <div class="d-flex justify-content-center">
-              <button class="btn btn-primary" data-dismiss="modal" (click)="activation(managerAD.id)">Valider</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
-            </div>
-          </form>
-        </div>
+<div class="modal fade" id="reactivation" tabindex="-1" role="dialog" aria-labelledby="connexionLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> </h5>
+      </div>
+      <div class="modal-body">
+
+        <h6 class="card-title text-center">Réactiver le compte du manager <strong>{{managerAD.prenom}} {{managerAD.nom}}
+            ?</strong></h6>
+        <form>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" data-dismiss="modal" (click)="activation(managerAD.id)">Valider</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>

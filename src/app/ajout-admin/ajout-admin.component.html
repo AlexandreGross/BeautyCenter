@@ -1,0 +1,35 @@
+<h5>Ajouter un manager</h5>
+<br>
+<form>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label> Nom du manager</label>
+        <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.nom" name="nomMA">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label> Prénom du manager</label>
+        <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.prenom" name="prenomMA">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label> e-mail</label>
+        <input type="text" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.mail" name="mailMA">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label> Mot de passe </label>
+        <input type="password" #nomAction="ngModel" class="form-control" required [(ngModel)]="man.mdp" name="mdpMA">
+      </div>
+    </div>
+  </div>
+  <div>
+    <button (click)="createManager()" class="btn btn-primary" data-dismiss="modal">Ajouter un
+      manager</button>
+    <button (click)="cacheAjoutModif()" class="btn btn-basic">Retour</button>
+  </div>
+</form>

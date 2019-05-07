@@ -5,6 +5,19 @@ import { Event } from '../model/Event';
 import { Prestation } from '../model/Prestation';
 import { Salon } from '../model/Salon';
 
+export interface Section1 {
+    id: number;
+    titre: string;
+    duree: number;
+    nbPersonnel: number;
+}
+export interface Section2 {
+  id: number;
+  titre: string;
+  duree: number;
+  nbPersonnel: number;
+}
+
 @Component({
   selector: 'app-gestion-prestation',
   templateUrl: './gestion-prestation.component.html',
@@ -78,5 +91,71 @@ export class GestionPrestationComponent implements OnInit {
       console.log(err);
     });
   }
+
+  toutespresta : Section1[] = [
+    {
+    id: 1,
+    titre: "Shampoing",
+    duree: 10,
+    nbPersonnel: 1
+    },
+    {
+      id: 2,
+      titre: "Coupe",
+      duree: 20,
+      nbPersonnel: 1
+    },
+    {
+      id: 3,
+      titre: "Coiffure",
+      duree: 30,
+      nbPersonnel: 1
+    },
+    {
+      id: 4,
+      titre: "Massage",
+      duree: 30,
+      nbPersonnel: 1
+    },
+    {
+      id: 5,
+      titre: "Massage",
+      duree: 60,
+      nbPersonnel: 1
+    },
+    {
+      id: 6,
+      titre: "Manucure",
+      duree: 15,
+      nbPersonnel: 1
+    },
+    {
+      id: 7,
+      titre: "Pedicure",
+      duree: 15,
+      nbPersonnel: 1
+    },
+  ]
+
+  toutesprestasalon : Section2[] = [
+    {
+    id: 1,
+    titre: "Shampoing",
+    duree: 10,
+    nbPersonnel: 1
+    },
+    {
+      id: 2,
+      titre: "Coupe",
+      duree: 20,
+      nbPersonnel: 1
+    },
+    {
+      id: 3,
+      titre: "Coiffure",
+      duree: 30,
+      nbPersonnel: 1
+    },
+  ]
 
 }
